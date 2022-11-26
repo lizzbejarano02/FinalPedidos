@@ -8,11 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./buscar-producto.component.css']
 })
 export class BuscarProductoComponent implements OnInit{
-  
+
   listadoRegistros: ModeloProducto[] = [];
 
   constructor(private productoServicio: ProductoService ){}
-  
+
   ngOnInit(): void {
     this.ObtenerListadoProducto();
   }

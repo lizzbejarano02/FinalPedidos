@@ -32,7 +32,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   exports:
   [
     CrearPersonaComponent,
-    EditarPersonaComponent
+    EditarPersonaComponent,
+    BuscarProductoComponent
   ]
 })
 export class AdministracionModule { }

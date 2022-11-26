@@ -11,7 +11,7 @@ export class ProductoService {
 
   url ='http://localhost:3000';
   token: String ='';
-  
+
   constructor(private http:HttpClient, private seguridadServicio: SeguridadService) {
 
     this.token = this.seguridadServicio.ObtenerToken();
@@ -20,6 +20,9 @@ export class ProductoService {
 
   ObtenerRegistros():Observable<ModeloProducto[]>{
     return this.http.get<ModeloProducto[]>(`${this.url}/productos`);
+  }
+  ObtenerRegistroPorId(id: string):Observable<ModeloProducto>{
+    return this.http.get<ModeloProducto>(`${this.url}/productos/${id}`);
   }
 
   CrearProducto(producto: ModeloProducto): Observable<ModeloProducto>{
@@ -32,7 +35,7 @@ export class ProductoService {
   }
 
   ActualizarProducto(producto: ModeloProducto): Observable<ModeloProducto>{
-    return this.http.put<ModeloProducto>(`${this.url}/productos`, producto,{
+    return this.http.put<ModeloProducto>(`${this.url}/productos/${producto.id}`, producto,{
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.token}`
       })
