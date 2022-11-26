@@ -1,3 +1,4 @@
+import { authenticate } from '@loopback/authentication';
 import { service } from '@loopback/core';
 import {
   Count,
@@ -26,6 +27,7 @@ import { PersonaRepository } from '../repositories';
 import { AutenticacionService } from '../services';
 const fetch = require('node-fetch');
 
+@authenticate('admin')
 export class PersonaController {
   constructor(
     @repository(PersonaRepository)
@@ -33,7 +35,7 @@ export class PersonaController {
     @service(AutenticacionService)
     public autenticacionService : AutenticacionService
   ) {}
-
+@authenticate.skip()
   @post('/identificarPersona',
   {
     responses: {
@@ -108,7 +110,7 @@ export class PersonaController {
   ): Promise<Count> {
     return this.personaRepository.count(where);
   }
-
+@authenticate.skip()
   @get('/personas')
   @response(200, {
     description: 'Array of Persona model instances',
@@ -145,7 +147,7 @@ export class PersonaController {
   ): Promise<Count> {
     return this.personaRepository.updateAll(persona, where);
   }
-
+@authenticate.skip()
   @get('/personas/{id}')
   @response(200, {
     description: 'Persona model instance',
